@@ -3,6 +3,7 @@ import math
 
 
 # this  is the initial system for start the system for columns and elevator when is status is operational all system turn it on
+print("Initial Battery Is Now Operational")
 class Battery(object):
     def __init__(self, nb_column, nb_elevator):
         self.status = "OPERATIONAL"
@@ -18,7 +19,7 @@ class Battery(object):
         for x in range(self.nb_column):
             self.column_list.append(Column("Column"+str(x+1), 2, 10))
 
-
+print("Starting Column System: ")
 class Column(object):
     def __init__(self, column_name, nb_elevator, nb_floor):
         self.name = column_name
@@ -30,6 +31,8 @@ class Column(object):
         self.call_buttons = []
         self.generate_button()
         self.column_list = []
+        print(column_name, "In Direction")
+    
 
 
     def find_call_button(self, requested_floor, direction):
@@ -37,43 +40,51 @@ class Column(object):
         for button in self.elevator_list:
             if button.requested_floor == requested_floor and button.direction == direction:
                 best_elevator = button
-                print("FOUND BUTTON")
+                print("FOUND BUTTON HAVE BEEN PRESSEND"+str(requested_floor))
                 break
         return best_elevator
+
 
     def RequestElevator(self, requested_floor, direction):
         best_elevator = None
         nearest_elevator = self.nearestElevator(requested_floor)
-        print("Nearest Elevator: " + str(nearest_elevator.name))
+        print("Nearest Elevator Is: " + str(nearest_elevator.name))
         for elevator in self.elevator_list:
 
             if requested_floor == elevator.current_floor:
                 best_elevator = elevator
-                print("Best Elevator")
-
+                print("The Best Elevator Is Choice:")
+                # elevator.elevator_Doors()
+              
             elif elevator == nearest_elevator:
                 best_elevator = elevator 
-                print("Best Elevator")
-
+                print("Second Nearest Elevator is Choice:")
+                # elevator.elevator_Doors()
+        
             elif elevator.status == "Stopped" and elevator.current_floor == requested_floor:
                 best_elevator = elevator
-                print("Best Elevator")
+                print("Third Nearest Elevator Is Choice:")
+                # elevator.elevator_Doors()
 
             elif elevator.status == "Idle" and elevator.current_floor == requested_floor:
                 best_elevator = elevator
-                print("Best Elevator")
+                print("fourth Nearest Elevator Is Choice:")
+                # elevator.elevator_Doors()
 
             elif elevator.status == "STOPPED" and direction == "GoingUp" and elevator.current_floor == requested_floor:
                 best_elevator = elevator
-                print("Best Elevator")
+                print("Fift Nearest Elevator Is Choice:")
+                # elevator.elevator_Doors()
 
             elif elevator.status == "STOPPED" and direction == "GoingDown" and elevator.current_floor == requested_floor:
                best_elevator = elevator
-               print("Best Elevator")
-        print("Best Elevator: " + str(best_elevator.name))
+               print("sixth Nearest Elevator Is Choice:")
+        print("The Nearest Elevator: " + str(best_elevator.name)+str(requested_floor))
         best_elevator.floor_list.append(requested_floor)
         return best_elevator
-
+    print("CalCulating The Nearest Elevator: ")
+                
+        
 # reference_gap = difference between reference gap and gap between 
 # each elevator Reference_gap is Elevator is looking for a distance then it goes around and finds the nearest   
     def nearestElevator(self, requested_floor):
@@ -144,7 +155,7 @@ class Column(object):
                     elevator.elevator_doors()
             elevator.status = "Idle"
             elevator.Direction = "GoingNoWhere"
-
+    print("Elevator Is Moving: ")
 
 class Elevator(object):   
     def __init__(self, name, origin, nb_floor):
@@ -168,8 +179,7 @@ class Elevator(object):
         else:
             print("light ON")
             
-
-
+            
 #  making doors open of elevator with a timer of 5 secondes   and closed it after 5 secondes      
     def elevator_doors(self):
             elevator.doors = "Open"
@@ -186,7 +196,7 @@ class Elevator(object):
     def move_up(self, floor):
         while self.current_floor < floor:
             self.current_floor +=1
-            print("Elevator #" + str(self.name) + "is at floor number " + str(self.current_floor))
+            print(" #" + str(self.name) + " is at floor number: " + str(self.current_floor))
 
 #  create a sequence that moves Elevator down with the Elevator and Elevator position,
 #  then it categorizes all the Elevator and if Elevator are smaller and it decreases by 1 each time,
@@ -194,28 +204,28 @@ class Elevator(object):
     def move_down(self, floor):
         while self.current_floor > floor:
             self.current_floor -=1
-            print("Elevator #" + str(self.name) + "is at floor number " + str(self.current_floor))
+            print("#" + str(self.name) + " is at floor number: " + str(self.current_floor))
 
 
 #   def __init__(self, name, origin, nb_floor):
-elevatorsss = Elevator("coucou", 0, 10,)
-print("first.elevatorsss.status =" + elevatorsss.status)
+# elevatorsss = Elevator("coucou", 0, 10,)
+# print("first.elevatorsss.status =" + elevatorsss.status)
 
-print("Debut test de base remi*****************************")
-column = Column("column_name", 2, 10)
-print("first column status = " + column.status)
+# print("Debut test de base remi*****************************")
+# column = Column("column_name", 2, 10)
+# print("first column status = " + column.status)
 
-for elevator in column.elevator_list:
-    print(elevator)
-    print(elevator.name)
-print("FIN test de base remi*****************************")
+# for elevator in column.elevator_list:
+#     print(elevator)
+#     print(elevator.name)
+# print("FIN test de base remi*****************************")
 
-for elevator in column.call_buttons:
-    print("call_buttons")
+# for elevator in column.call_buttons:
+#     print("call_buttons")
 
 
-print("Debut remi test scenario 1 exigence*****************************")
-column_test_scenario_1 = Column("column_name", 2, 10)
+# print("Debut remi test scenario 1 exigence*****************************")
+# column_test_scenario_1 = Column("column_name", 2, 10)
 
 
 
