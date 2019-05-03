@@ -4,7 +4,5 @@
 
 
 
-
-
-
-svp prendre le commit de 22h20  pour correction merci
+ 
+ Prendre le commit de 22h20  pour correction merci
